@@ -28,10 +28,21 @@ public class RegistrationService {
     @Transactional
     public RegistrationResponse register(Long activityId, RegistrationRequest request) {
         Activity activity = activityService.requireActivity(activityId);
+
+        if (activity.getStatus().name().equals("CLOSED")) {
+            throw new IllegalStateException("Inscrições encerradas para esta atividade.");
+        }
+
+        if (activity.getRegisteredCount() >= activity.getCapacity()) {
+            throw new IllegalStateException("Activity is full");
+        }
+
         Registration registration = registrationRepository.save(
-                new Registration(activity, request.studentName(), request.studentEmail())
+            new Registration(activity, request.studentName(), request.studentEmail())
         );
+        
         activity.incrementRegistrations();
+
         activityRepository.save(activity);
         return RegistrationResponse.from(registration);
     }
