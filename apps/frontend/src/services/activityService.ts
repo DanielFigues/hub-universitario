@@ -26,10 +26,6 @@ export async function createRegistration(
 }
 
 export const getDashboardMetrics = async (): Promise<DashboardMetrics> => {
-  return {
-    totalActivities: 42,
-    totalRegistrations: 156,
-    openActivities: 30,
-    fullActivities: 12
-  };
+  const response = await api.get<DashboardMetrics>('/activities/dashboard/metrics');
+  return response.data;
 };
