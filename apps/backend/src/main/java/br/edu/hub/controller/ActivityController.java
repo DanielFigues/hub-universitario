@@ -2,6 +2,7 @@ package br.edu.hub.controller;
 
 import br.edu.hub.dto.ActivityResponse;
 import br.edu.hub.dto.ActivityUpdateRequest;
+import br.edu.hub.dto.DashBoardMetrics;
 import br.edu.hub.service.ActivityService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,11 @@ public class ActivityController {
 
     public ActivityController(ActivityService activityService) {
         this.activityService = activityService;
+    }
+
+    @GetMapping("/dashboard/metrics")
+    public DashBoardMetrics getDashboardMetrics() {
+        return activityService.getDashboardMetrics();
     }
 
     @GetMapping
