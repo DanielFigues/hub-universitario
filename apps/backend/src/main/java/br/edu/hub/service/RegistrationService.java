@@ -30,7 +30,7 @@ public class RegistrationService {
         Activity activity = activityService.requireActivity(activityId);
 
         if (registrationRepository.existsByActivityIdAndStudentEmail(activityId, request.studentEmail())) {
-            throw new IllegalArgumentException("O estudante já está inscrito nesta atividade.");
+            throw new IllegalStateException("O estudante já está inscrito nesta atividade.");
         }
 
         if (activity.getStatus().name().equals("CLOSED")) {
