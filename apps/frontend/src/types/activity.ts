@@ -40,3 +40,10 @@ export interface ApiError {
   message: string
   errors?: Record<string, string>
 }
+
+export interface DashboardMetrics {
+  totalActivities: number;
+  totalRegistrations: number;
+  openActivities: number;
+  fullActivities: number;
+}

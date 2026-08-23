@@ -1,5 +1,6 @@
 import { api } from './api'
 import type { Activity, Registration, RegistrationInput } from '../types/activity'
+import { DashboardMetrics } from '../types/activity';
 
 export async function getActivities(search = ''): Promise<Activity[]> {
   const response = await api.get<Activity[]>('/activities', { params: search ? { search } : undefined })
@@ -23,3 +24,12 @@ export async function createRegistration(
   const response = await api.post<Registration>(`/activities/${activityId}/registrations`, input)
   return response.data
 }
+
+export const getDashboardMetrics = async (): Promise<DashboardMetrics> => {
+  return {
+    totalActivities: 42,
+    totalRegistrations: 156,
+    openActivities: 30,
+    fullActivities: 12
+  };
+};
