@@ -24,7 +24,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(IllegalArgumentException.class)
     ResponseEntity<ErrorResponse> handleIllegalArgument(IllegalArgumentException exception) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(ErrorResponse.of(exception.getMessage()));
+    }
+    @ExceptionHandler(IllegalStateException.class)
+    ResponseEntity<ErrorResponse> handleIllegalState(IllegalStateException exception){
+        return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(ErrorResponse.of(exception.getMessage()));
     }
 }
