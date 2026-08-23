@@ -29,6 +29,10 @@ public class RegistrationService {
     public RegistrationResponse register(Long activityId, RegistrationRequest request) {
         Activity activity = activityService.requireActivity(activityId);
 
+        if (registrationRepository.existsByActivityIdAndStudentEmail(activityId, request.studentEmail())) {
+            throw new IllegalStateException("O estudante já está inscrito nesta atividade.");
+        }
+
         if (activity.getStatus().name().equals("CLOSED")) {
             throw new IllegalStateException("Inscrições encerradas para esta atividade.");
         }
