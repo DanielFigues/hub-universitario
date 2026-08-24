@@ -35,4 +35,5 @@ public class RegistrationController {
     public List<RegistrationResponse> list(@PathVariable Long activityId) {
         return registrationService.list(activityId);
     }
+    
 }
