@@ -39,8 +39,19 @@ export function ActivitiesPage() {
             <input
               id="activity-search"
               value={searchInput}
-              onChange={(event) => setSearchInput(event.target.value)}
+              onChange={(event) => {
+                const newValue = event.target.value
+                setSearchInput(newValue)
+                setShowDropdown(true)
+              
+                if (newValue.trim() === '') {
+                  setSearch('')
+                  setShowDropdown(false)
+                }
+              }}
+              onFocus={() => setShowDropdown(true)}
               placeholder="Buscar atividades..."
+              autoComplete="off"
             />
             <button type="submit">Buscar</button>
           </form>
