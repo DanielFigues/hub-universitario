@@ -13,14 +13,16 @@
 - Implementação da correção dos códigos de status HTTP devolvidos pela API.
 - Esclarecimento de dúvidas sobre comandos e melhores práticas de fluxos no Git/GitHub (criação de issues, resolução de travas no build/node_modules e vinculação de Pull Requests).
 - Nivelamento na linguagem Java e ecossistema Spring Boot, acelerando a compreenção de sintaxes avançadas, anotações do framework e padrões de projeto.
+- Correção de testes automatizados do React lidando com elementos duplicados na DOM e seletores assíncronos.
 
 ## Resumo dos principais prompts ou objetivos solicitados
 
-- “Como impedir inscrições acima do limite e resolver problemas de concorrência em requisições simultâneas no Spring Boot?”
-- “Qual a melhor expressão regular (Regex) no Java/Bean Validation para barrar números e caracteres especiais no campo de nome?”
-- “Quais os status HTTP mais adequados para refletir violações de regras de negócio, como tentar se inscrever em uma atividade `FULL` ou enviar dados inválidos?”
+- "Como impedir inscrições acima do limite e resolver problemas de concorrência em requisições simultâneas no Spring Boot?"
+- "Qual a melhor expressão regular (Regex) no Java/Bean Validation para barrar números e caracteres especiais no campo de nome?"
+- "Quais os status HTTP mais adequados para refletir violações de regras de negócio, como tentar se inscrever em uma atividade `FULL` ou enviar dados inválidos?"
 - "Por que os comandos de checkout e pull falham ao identificar alterações não rastreadas na pasta node_modules?"
-- “Como estruturar os filtros de busca no React mantendo o estado correto sem recarregar a página?”
+- "Como estruturar os filtros de busca no React mantendo o estado correto sem recarregar a página?"
+- "Por que o waitFor do Testing Library está estourando timeout no teste de autocomplete da página de atividades?"
 
 ## Arquivos ou partes da solução influenciados
 
