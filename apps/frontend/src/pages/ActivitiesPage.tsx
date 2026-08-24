@@ -9,7 +9,9 @@ export function ActivitiesPage() {
   const [searchInput, setSearchInput] = useState('')
   const [search, setSearch] = useState('')
   const [showDropdown, setShowDropdown] = useState(false)
+  const autocompleteQuery = useActivities(searchInput)
   const activitiesQuery = useActivities(search)
+  const suggestions = autocompleteQuery.data?.slice(0, 5) ?? []
 
   function handleSearch(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
