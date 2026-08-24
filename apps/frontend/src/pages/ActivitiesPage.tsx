@@ -8,6 +8,7 @@ export function ActivitiesPage() {
   const [category, setCategory] = useState<CategoryFilter>('ALL')
   const [searchInput, setSearchInput] = useState('')
   const [search, setSearch] = useState('')
+  const [showDropdown, setShowDropdown] = useState(false)
   const activitiesQuery = useActivities(search)
 
   function handleSearch(event: FormEvent<HTMLFormElement>) {
