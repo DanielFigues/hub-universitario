@@ -11,13 +11,15 @@
 - Resolução de problemas de integridade de dados e concorrência no banco de dados.
 - Implementação de regras de validação de dados de entrada no backend.
 - Implementação da correção dos códigos de status HTTP devolvidos pela API.
-- Esclarecimento de dúvidas sobre comandos e melhores práticas de fluxos no Git/GitHub (criação de issues e vinculação de Pull Requests).
+- Esclarecimento de dúvidas sobre comandos e melhores práticas de fluxos no Git/GitHub (criação de issues, resolução de travas no build/node_modules e vinculação de Pull Requests).
+- Nivelamento na linguagem Java e ecossistema Spring Boot, acelerando a compreenção de sintaxes avançadas, anotações do framework e padrões de projeto.
 
 ## Resumo dos principais prompts ou objetivos solicitados
 
 - “Como impedir inscrições acima do limite e resolver problemas de concorrência em requisições simultâneas no Spring Boot?”
 - “Qual a melhor expressão regular (Regex) no Java/Bean Validation para barrar números e caracteres especiais no campo de nome?”
 - “Quais os status HTTP mais adequados para refletir violações de regras de negócio, como tentar se inscrever em uma atividade `FULL` ou enviar dados inválidos?”
+- "Por que os comandos de checkout e pull falham ao identificar alterações não rastreadas na pasta node_modules?"
 - “Como estruturar os filtros de busca no React mantendo o estado correto sem recarregar a página?”
 
 ## Arquivos ou partes da solução influenciados
@@ -30,6 +32,8 @@
 
 - **Aceitas:** Adoção da anotação `@Pattern` com a regex fornecida para sanitização no DTO, o que isola a camada de apresentação do Service. Aplicação dos status HTTP corretos sugeridos (`409 Conflict` para atividade lotada, `400 Bad Request` para dados incorretos).
 - **Adaptadas:** As sugestões de arquitetura para controle de concorrência foram adaptadas para utilizar apenas os recursos nativos do Spring Data JPA e do H2. Ferramentas, dependências externas pesadas ou atalhos superficiais de resolução sugeridas pela IA foram rejeitadas para respeitar estritamente os fluxo lógicos dos algoritmos e a simplicidade exigida pelo `PROJECT.md`.
+
+Ajuste de Status HTTP de Erro: Na revisão de uma correção, foi sugerido pela IA o retorno de status 404 Not Found para tratar a tentativa de re-inscrição. Após a leitura e análise do PROJECT.md, a sugestão foi adaptada para 409 Conflict, garantindo que as regras de negócio não fossem descumpridas.
 
 ## Como o participante revisou e validou o resultado
 
