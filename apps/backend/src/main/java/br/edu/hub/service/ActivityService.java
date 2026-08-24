@@ -2,8 +2,11 @@ package br.edu.hub.service;
 
 import br.edu.hub.dto.ActivityResponse;
 import br.edu.hub.dto.ActivityUpdateRequest;
+import br.edu.hub.dto.DashBoardMetrics;
 import br.edu.hub.entity.Activity;
+import br.edu.hub.entity.ActivityStatus;
 import br.edu.hub.repository.ActivityRepository;
+import br.edu.hub.repository.RegistrationRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,9 +15,11 @@ import java.util.List;
 @Service
 public class ActivityService {
     private final ActivityRepository activityRepository;
+    private final RegistrationRepository registrationRepository; 
 
-    public ActivityService(ActivityRepository activityRepository) {
+public ActivityService(ActivityRepository activityRepository, RegistrationRepository registrationRepository) {
         this.activityRepository = activityRepository;
+        this.registrationRepository = registrationRepository;
     }
 
     @Transactional(readOnly = true)
@@ -24,8 +29,8 @@ public class ActivityService {
     if (search == null || search.trim().isEmpty()) {
         activities = activityRepository.findAllByOrderByDateDesc();
     } else {
-        activities = activityRepository.findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseOrderByDateDesc(search, search);
-    } 
+    activities = activityRepository.findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseOrderByDateDesc(search, search); 
+    }
     return activities.stream()
             .map(ActivityResponse::from)
             .toList();
@@ -53,5 +58,20 @@ public class ActivityService {
     public Activity requireActivity(Long id) {
         return activityRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Activity not found"));
+    }
+
+    @Transactional(readOnly = true)
+    public DashBoardMetrics getDashboardMetrics() {
+        long totalActivities = activityRepository.count();
+        long totalRegistrations = registrationRepository.count();
+        long openActivities = activityRepository.countByStatus(ActivityStatus.OPEN);
+        long fullActivities = activityRepository.countByStatus(ActivityStatus.FULL);
+
+        return new DashBoardMetrics(
+                totalActivities, 
+                totalRegistrations, 
+                openActivities, 
+                fullActivities
+        );
     }
 }
