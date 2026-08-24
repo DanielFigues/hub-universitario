@@ -110,6 +110,11 @@ public class Activity {
             status = ActivityStatus.FULL;
         }
     }
+    public void decrementRegistrations() {
+    if (this.registeredCount > 0) {
+        this.registeredCount--;
+        }
+    }
 
     public int remainingSpots() {
         return Math.max(capacity - registeredCount, 0);
