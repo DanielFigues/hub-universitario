@@ -16,7 +16,14 @@ export function ActivitiesPage() {
   function handleSearch(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setSearch(searchInput.trim())
+    setShowDropdown(false)
   }
+
+  function handleSelectSuggestion(title: string) {
+  setSearchInput(title)
+  setSearch(title)
+  setShowDropdown(false)
+}
 
   const filteredActivities = filterActivities(activitiesQuery.data ?? [], category)
 
