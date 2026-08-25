@@ -1,0 +1,17 @@
+target/
+*.jar
+*.class
+.mvn/
+
+*.db
+*.mv.db
+*.trace.db
+
+node_modules/
+dist/
+.env
+
+.idea/
+.vscode/
+*.iml
+.DS_Store

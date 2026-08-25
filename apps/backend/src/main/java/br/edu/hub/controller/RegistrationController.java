@@ -38,6 +38,7 @@ public class RegistrationController {
     public List<RegistrationResponse> list(@PathVariable Long activityId) {
         return registrationService.list(activityId);
     }
+
     @DeleteMapping
     public ResponseEntity<Void> cancel(@PathVariable Long activityId, @RequestParam String studentEmail) {
         registrationService.cancelRegistration(activityId, studentEmail);
