@@ -18,8 +18,8 @@ public class RegistrationService {
     private final ActivityService activityService;
 
     public RegistrationService(RegistrationRepository registrationRepository,
-                               ActivityRepository activityRepository,
-                               ActivityService activityService) {
+            ActivityRepository activityRepository,
+            ActivityService activityService) {
         this.registrationRepository = registrationRepository;
         this.activityRepository = activityRepository;
         this.activityService = activityService;
@@ -42,13 +42,26 @@ public class RegistrationService {
         }
 
         Registration registration = registrationRepository.save(
-            new Registration(activity, request.studentName(), request.studentEmail())
-        );
-        
+                new Registration(activity, request.studentName(), request.studentEmail()));
+
         activity.incrementRegistrations();
 
         activityRepository.save(activity);
         return RegistrationResponse.from(registration);
+
+    }
+
+    @Transactional
+    public void cancelRegistration(Long activityId, String studentEmail) {
+        Registration registration = registrationRepository.findByActivityIdAndStudentEmail(activityId, studentEmail)
+                .orElseThrow(() -> new IllegalArgumentException("Inscrição não encontrada"));
+
+        Activity activity = registration.getActivity();
+
+        activity.decrementRegistrations();
+        activityRepository.save(activity);
+
+        registrationRepository.delete(registration);
     }
 
     @Transactional(readOnly = true)
