@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -74,5 +75,25 @@ class RegistrationControllerTest {
         )
         .andExpect(status().isOk())
         .andExpect(jsonPath("$[0].studentEmail").value("maria@email.com"));
+    }
+
+    @Test
+    void shouldCancelRegistration() throws Exception {
+        mockMvc.perform(
+                post("/api/activities/" + openActivity.getId() + "/registrations")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                            {
+                                "studentName": "Maria Souza",
+                                "studentEmail": "maria@email.com"
+                            }
+                        """)
+        ).andExpect(status().isCreated());
+
+        mockMvc.perform(
+                delete("/api/activities/" + openActivity.getId() + "/registrations")
+                        .param("studentEmail", "maria@email.com")
+        )
+        .andExpect(status().isNoContent());
     }
 }
